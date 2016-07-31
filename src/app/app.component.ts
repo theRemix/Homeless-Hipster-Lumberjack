@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Component, OnInit } from '@angular/core';
+import { FirebaseListObservable } from 'angularfire2';
 import { DisplayComponent } from './display';
+import { BeardsService, BeardType } from './beards.service';
 
 @Component({
   moduleId: module.id,
@@ -9,10 +10,15 @@ import { DisplayComponent } from './display';
   styleUrls: ['app.component.css'],
   directives: [DisplayComponent]
 })
-export class AppComponent {
-  items: FirebaseListObservable<any[]>;
+export class AppComponent implements OnInit {
+  private beards: FirebaseListObservable<any[]>;
+  private bs: BeardsService;
 
-  constructor(af: AngularFire) {
-    this.items = af.database.list('/lumberjack');
+  constructor(bs: BeardsService) {
+    this.bs = bs;
+  }
+
+  ngOnInit() {
+    this.beards = this.bs.getBeards(BeardType.LUMBERJACK, 3);
   }
 }
