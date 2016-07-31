@@ -12,7 +12,7 @@ const db = fbApp.database();
 const rp = require('request-promise');
 const EXACT_TERMS = '{{EXACT_TERMS}}';
 
-const CSE_QUERY_URL = `https://www.googleapis.com/customsearch/v1?q=mustache&cx=${encodeURIComponent(CSE_CX)}&exactTerms=${EXACT_TERMS}&imgSize=medium&imgType=face&searchType=image&key=${CSE_API_KEY}`;
+const CSE_QUERY_URL = `https://www.googleapis.com/customsearch/v1?q=beard&cx=${encodeURIComponent(CSE_CX)}&exactTerms=${EXACT_TERMS}&imgSize=medium&imgType=face&searchType=image&key=${CSE_API_KEY}`;
 
 /*
  * Helpers
@@ -33,7 +33,6 @@ const imageFormat = i => ({
 });
 const getImageResults = data => data.items.map(imageFormat);
 const saveToFirebase = type => images => db.ref(type).set(images);
-// const saveToFirebase = type => images => console.log(images);
 
 /*
  * Work
